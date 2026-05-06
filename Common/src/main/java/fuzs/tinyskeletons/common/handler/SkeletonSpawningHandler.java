@@ -1,8 +1,7 @@
 package fuzs.tinyskeletons.common.handler;
 
-import com.google.common.collect.ImmutableMap;
 import fuzs.puzzleslib.common.api.event.v1.core.EventResultHolder;
-import fuzs.tinyskeletons.common.init.ModRegistry;
+import fuzs.tinyskeletons.common.util.BabySkeletonHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -20,27 +19,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class SkeletonSpawningHandler {
-    private static final Map<EntityType<?>, Holder<EntityType<?>>> BABY_SKELETON_VARIANTS = ImmutableMap.of(EntityType.SKELETON,
-            (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_SKELETON_ENTITY_TYPE),
-            EntityType.WITHER_SKELETON,
-            (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_WITHER_SKELETON_ENTITY_TYPE),
-            EntityType.STRAY,
-            (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_STRAY_ENTITY_TYPE),
-            EntityType.BOGGED,
-            (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_BOGGED_ENTITY_TYPE),
-            EntityType.PARCHED,
-            (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_PARCHED_ENTITY_TYPE));
 
     public static void onEntityLoad(Entity entity, ServerLevel serverLevel, boolean isLoadedFromDisk, @Nullable EntitySpawnReason entitySpawnReason) {
         // Exclude when summoned by command as this would break forcefully spawning an adult skeleton,
         // since there is no baby flag as with zombies which could force that otherwise.
         if (!isLoadedFromDisk && entitySpawnReason != null && entitySpawnReason != EntitySpawnReason.COMMAND
                 && Zombie.getSpawnAsBabyOdds(serverLevel.getRandom())) {
-            Holder<EntityType<?>> holder = BABY_SKELETON_VARIANTS.get(entity.getType());
+            Holder<EntityType<?>> holder = BabySkeletonHelper.ADULT_TO_BABY_SKELETON_MAP.get(entity.getType());
             if (holder != null) {
                 Entity babyEntity = spawnOffspring(serverLevel, holder.value(), entity, entitySpawnReason);
                 if (babyEntity != null) {
@@ -54,7 +42,7 @@ public class SkeletonSpawningHandler {
         ItemStack itemInHand = player.getItemInHand(interactionHand);
         if (target.isAlive() && itemInHand.getItem() instanceof SpawnEggItem) {
             EntityType<?> entityType = SpawnEggItem.getType(itemInHand);
-            Holder<EntityType<?>> holder = BABY_SKELETON_VARIANTS.get(entityType);
+            Holder<EntityType<?>> holder = BabySkeletonHelper.ADULT_TO_BABY_SKELETON_MAP.get(entityType);
             if (holder != null && (target.getType() == holder.value() || target.getType() == entityType)) {
                 if (level instanceof ServerLevel serverLevel) {
                     Entity entity = spawnOffspring(serverLevel,

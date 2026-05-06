@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.Nullable;
 
 public class BabyWitherSkeleton extends WitherSkeleton implements SkullCarryingMob {
     private final AvoidEntityGoal<Player> fleePlayerGoal = new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0D, 1.2D);
@@ -129,5 +130,10 @@ public class BabyWitherSkeleton extends WitherSkeleton implements SkullCarryingM
         } else {
             return ItemStack.EMPTY;
         }
+    }
+
+    @Override
+    public @Nullable ItemStack getPickResult() {
+        return BabySkeletonHelper.getPickResult(this);
     }
 }

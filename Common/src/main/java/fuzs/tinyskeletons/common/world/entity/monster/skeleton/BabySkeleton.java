@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
+import org.jspecify.annotations.Nullable;
 
 public class BabySkeleton extends Skeleton {
     private int switchWeaponCooldown;
@@ -134,5 +135,10 @@ public class BabySkeleton extends Skeleton {
         if (BabySkeletonHelper.shouldBecomeAngry(damageSource.getEntity())) {
             super.resolveMobResponsibleForDamage(damageSource);
         }
+    }
+
+    @Override
+    public @Nullable ItemStack getPickResult() {
+        return BabySkeletonHelper.getPickResult(this);
     }
 }

@@ -8,8 +8,10 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.skeleton.Stray;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.jspecify.annotations.Nullable;
 
 public class BabyStray extends Stray {
 
@@ -71,5 +73,10 @@ public class BabyStray extends Stray {
     @Override
     public void performRangedAttack(LivingEntity target, float velocity) {
         BabySkeletonHelper.performRangedAttack(this, target);
+    }
+
+    @Override
+    public @Nullable ItemStack getPickResult() {
+        return BabySkeletonHelper.getPickResult(this);
     }
 }
