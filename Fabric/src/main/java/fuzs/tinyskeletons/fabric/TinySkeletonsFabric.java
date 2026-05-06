@@ -1,7 +1,7 @@
 package fuzs.tinyskeletons.fabric;
 
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
-import fuzs.tinyskeletons.TinySkeletons;
+import fuzs.tinyskeletons.common.TinySkeletons;
 import net.fabricmc.api.ModInitializer;
 
 public class TinySkeletonsFabric implements ModInitializer {
