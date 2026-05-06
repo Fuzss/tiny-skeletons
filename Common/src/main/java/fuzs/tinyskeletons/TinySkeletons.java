@@ -1,11 +1,11 @@
 package fuzs.tinyskeletons;
 
-import fuzs.puzzleslib.api.core.v1.ModConstructor;
-import fuzs.puzzleslib.api.core.v1.context.EntityAttributesContext;
-import fuzs.puzzleslib.api.core.v1.context.SpawnPlacementsContext;
-import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
-import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
-import fuzs.tinyskeletons.handler.BabyConversionHandler;
+import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.common.api.core.v1.context.EntityAttributesContext;
+import fuzs.puzzleslib.common.api.core.v1.context.SpawnPlacementsContext;
+import fuzs.puzzleslib.common.api.event.v1.entity.ServerEntityEvents;
+import fuzs.puzzleslib.common.api.event.v1.entity.player.PlayerInteractEvents;
+import fuzs.tinyskeletons.handler.SkeletonSpawningHandler;
 import fuzs.tinyskeletons.init.ModRegistry;
 import fuzs.tinyskeletons.util.BabySkeletonHelper;
 import fuzs.tinyskeletons.world.entity.monster.skeleton.BabyStray;
@@ -31,9 +31,8 @@ public class TinySkeletons implements ModConstructor {
     }
 
     private static void registerEventHandlers() {
-        // using this event now; the other one wouldn't show the hand swing on Fabric
-        PlayerInteractEvents.USE_ENTITY_AT.register(BabyConversionHandler::onEntityInteract);
-        ServerEntityLevelEvents.LOAD.register(BabyConversionHandler::onEntityLoad);
+        PlayerInteractEvents.USE_ENTITY.register(SkeletonSpawningHandler::onUseEntity);
+        ServerEntityEvents.LOAD.register(SkeletonSpawningHandler::onEntityLoad);
     }
 
     @Override

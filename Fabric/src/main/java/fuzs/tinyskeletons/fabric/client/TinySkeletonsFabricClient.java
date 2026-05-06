@@ -1,6 +1,6 @@
 package fuzs.tinyskeletons.fabric.client;
 
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.tinyskeletons.TinySkeletons;
 import fuzs.tinyskeletons.client.TinySkeletonsClient;
 import net.fabricmc.api.ClientModInitializer;

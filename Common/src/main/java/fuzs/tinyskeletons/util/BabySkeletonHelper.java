@@ -50,7 +50,7 @@ public class BabySkeletonHelper {
     }
 
     public static boolean shouldBecomeAngry(@Nullable Entity entity) {
-        return entity == null || !entity.getType().is(EntityTypeTags.SKELETONS);
+        return entity == null || !entity.is(EntityTypeTags.SKELETONS);
     }
 
     public static void performRangedAttack(AbstractSkeleton abstractSkeleton, LivingEntity target) {

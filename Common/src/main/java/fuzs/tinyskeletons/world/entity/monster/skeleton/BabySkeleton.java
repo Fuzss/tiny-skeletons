@@ -1,6 +1,6 @@
 package fuzs.tinyskeletons.world.entity.monster.skeleton;
 
-import fuzs.puzzleslib.api.item.v2.ToolTypeHelper;
+import fuzs.puzzleslib.common.api.item.v2.ToolTypeHelper;
 import fuzs.tinyskeletons.init.ModRegistry;
 import fuzs.tinyskeletons.util.BabySkeletonHelper;
 import fuzs.tinyskeletons.world.entity.ai.goal.RangedBowAttackWithoutStrafingGoal;

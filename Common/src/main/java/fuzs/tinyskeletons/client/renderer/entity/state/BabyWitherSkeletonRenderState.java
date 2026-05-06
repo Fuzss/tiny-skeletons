@@ -1,10 +1,13 @@
 package fuzs.tinyskeletons.client.renderer.entity.state;
 
+import net.minecraft.client.renderer.block.BlockModelRenderState;
 import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
-import net.minecraft.world.item.ItemStack;
 
 public class BabyWitherSkeletonRenderState extends SkeletonRenderState {
-    public boolean renderCarryingSkull;
+    public final BlockModelRenderState skullModel = new BlockModelRenderState();
     public boolean isDancing;
-    public ItemStack skullItem = ItemStack.EMPTY;
+
+    public boolean hasSkullItem() {
+        return !this.skullModel.isEmpty();
+    }
 }

@@ -1,7 +1,7 @@
 package fuzs.tinyskeletons.init;
 
-import fuzs.puzzleslib.api.init.v3.registry.RegistryManager;
-import fuzs.puzzleslib.api.init.v3.tags.TagFactory;
+import fuzs.puzzleslib.common.api.init.v3.registry.RegistryManager;
+import fuzs.puzzleslib.common.api.init.v3.tags.TagFactory;
 import fuzs.tinyskeletons.TinySkeletons;
 import fuzs.tinyskeletons.world.entity.projectile.throwableitemprojectile.HurtingItemProjectile;
 import fuzs.tinyskeletons.world.entity.monster.skeleton.*;

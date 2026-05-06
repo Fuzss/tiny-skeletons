@@ -1,10 +1,10 @@
 package fuzs.tinyskeletons.client;
 
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.core.v1.context.EntityRenderersContext;
-import fuzs.puzzleslib.api.client.core.v1.context.LayerDefinitionsContext;
-import fuzs.puzzleslib.api.core.v1.context.PackRepositorySourcesContext;
-import fuzs.puzzleslib.api.resources.v1.PackResourcesHelper;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.context.EntityRenderersContext;
+import fuzs.puzzleslib.common.api.client.core.v1.context.LayerDefinitionsContext;
+import fuzs.puzzleslib.common.api.core.v1.context.PackRepositorySourcesContext;
+import fuzs.puzzleslib.common.api.resources.v1.PackResourcesHelper;
 import fuzs.tinyskeletons.TinySkeletons;
 import fuzs.tinyskeletons.client.model.geom.ModModelLayers;
 import fuzs.tinyskeletons.client.packs.SkeletonTextureCopiesPackResources;

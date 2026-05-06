@@ -1,6 +1,6 @@
 package fuzs.tinyskeletons.neoforge.client;
 
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
 import fuzs.tinyskeletons.TinySkeletons;
 import fuzs.tinyskeletons.client.TinySkeletonsClient;

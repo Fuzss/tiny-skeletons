@@ -11,11 +11,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
+/**
+ * @see net.minecraft.world.entity.projectile.throwableitemprojectile.Snowball
+ */
 public class HurtingItemProjectile extends ThrowableItemProjectile {
 
     public HurtingItemProjectile(EntityType<? extends HurtingItemProjectile> entityType, Level level) {
@@ -44,16 +48,15 @@ public class HurtingItemProjectile extends ThrowableItemProjectile {
         }
     }
 
-    protected ParticleOptions getParticle() {
-        return new ItemParticleOption(ParticleTypes.ITEM, this.getItem());
-    }
-
     @Override
     public void handleEntityEvent(byte id) {
         if (id == 3) {
-            ParticleOptions particleOptions = this.getParticle();
-            for (int i = 0; i < 8; i++) {
-                this.level().addParticle(particleOptions, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+            if (!this.getItem().isEmpty()) {
+                ParticleOptions particleOptions = new ItemParticleOption(ParticleTypes.ITEM,
+                        ItemStackTemplate.fromNonEmptyStack(this.getItem()));
+                for (int i = 0; i < 8; i++) {
+                    this.level().addParticle(particleOptions, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+                }
             }
         }
     }
@@ -68,8 +71,8 @@ public class HurtingItemProjectile extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (this.level() instanceof ServerLevel) {
-            this.level().broadcastEntityEvent(this, (byte) 3);
+        if (this.level() instanceof ServerLevel serverLevel) {
+            serverLevel.broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
     }

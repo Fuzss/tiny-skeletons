@@ -1,7 +1,7 @@
 package fuzs.tinyskeletons.client.packs;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import fuzs.puzzleslib.api.resources.v1.AbstractModPackResources;
+import fuzs.puzzleslib.common.api.resources.v1.AbstractModPackResources;
 import fuzs.tinyskeletons.client.renderer.entity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;

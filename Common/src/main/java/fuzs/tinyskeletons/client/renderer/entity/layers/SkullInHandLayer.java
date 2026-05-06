@@ -6,53 +6,38 @@ import fuzs.tinyskeletons.client.renderer.entity.state.BabyWitherSkeletonRenderS
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.BlockState;
 
+/**
+ * @see net.minecraft.client.renderer.entity.layers.CarriedBlockLayer
+ */
 public class SkullInHandLayer<S extends BabyWitherSkeletonRenderState, M extends EntityModel<S> & ArmedModel<S>> extends ItemInHandLayer<S, M> {
-    private final BlockRenderDispatcher blockRenderer;
 
-    public SkullInHandLayer(RenderLayerParent<S, M> renderLayerParent, BlockRenderDispatcher blockRenderer) {
+    public SkullInHandLayer(RenderLayerParent<S, M> renderLayerParent) {
         super(renderLayerParent);
-        this.blockRenderer = blockRenderer;
     }
 
     @Override
-    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, S renderState, float yRot, float xRot) {
-        ItemStack itemStack = renderState.skullItem;
-        if (itemStack.getItem() instanceof BlockItem blockItem) {
-            this.submitHandSkullItem(blockItem.getBlock().defaultBlockState(),
-                    poseStack,
+    public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, S state, float yRot, float xRot) {
+        if (!state.skullModel.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.translate(0.0F, -0.075F, 0.325F);
+            poseStack.translate(0.0F, 0.6875F, -0.75F);
+            poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+            poseStack.translate(0.25F, 0.1875F, 0.25F);
+            poseStack.scale(-0.5F, -0.5F, 0.5F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+            state.skullModel.submit(poseStack,
                     submitNodeCollector,
-                    packedLight,
-                    renderState);
+                    lightCoords,
+                    OverlayTexture.NO_OVERLAY,
+                    state.outlineColor);
+            poseStack.popPose();
         } else {
-            super.submit(poseStack, submitNodeCollector, packedLight, renderState, yRot, xRot);
+            super.submit(poseStack, submitNodeCollector, lightCoords, state, yRot, xRot);
         }
-    }
-
-    /**
-     * Mostly copied from {@link net.minecraft.client.renderer.entity.layers.CarriedBlockLayer}.
-     */
-    private void submitHandSkullItem(BlockState blockState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, S renderState) {
-        poseStack.pushPose();
-        poseStack.translate(0.0F, -0.075F, 0.325F);
-        poseStack.translate(0.0F, 0.6875F, -0.75F);
-        poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
-        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-        poseStack.translate(0.25F, 0.1875F, 0.25F);
-        poseStack.scale(-0.5F, -0.5F, 0.5F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-        submitNodeCollector.submitBlock(poseStack,
-                blockState,
-                packedLight,
-                OverlayTexture.NO_OVERLAY,
-                renderState.outlineColor);
-        poseStack.popPose();
     }
 }
