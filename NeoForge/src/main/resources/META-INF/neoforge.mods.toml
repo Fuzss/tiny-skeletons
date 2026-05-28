@@ -44,5 +44,3 @@ type = "required"
 versionRange = "[${minPuzzlesVersion},)"
 ordering = "NONE"
 side = "BOTH"
-["lithium:options"]
-"mixin.world.chunk_access" = false
