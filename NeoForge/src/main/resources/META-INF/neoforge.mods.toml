@@ -47,6 +47,3 @@ side = "BOTH"
 
 [modproperties.${ modId }]
 catalogueImageIcon = "mod_logo.png"
-
-["lithium:options"]
-"mixin.world.chunk_access" = false

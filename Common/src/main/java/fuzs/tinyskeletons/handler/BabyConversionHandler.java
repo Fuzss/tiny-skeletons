@@ -99,7 +99,12 @@ public class BabyConversionHandler {
                 0.0F);
         mob.yHeadRot = mob.getYRot();
         mob.yBodyRot = mob.getYRot();
-        DifficultyInstance difficulty = serverLevel.getCurrentDifficultyAt(parent.blockPosition());
+        // this should normally be level.getCurrentDifficultyAt(mob.blockPosition()), which for some reason causes a world gen deadlock when generating nether fortresses for some setups (cannot reproduce in vanilla)
+        // the deadlock comes from Level::getChunkAt, so we omit that part all call everything else as usual since the chunk otherwise is not queried
+        DifficultyInstance difficulty = new DifficultyInstance(serverLevel.getDifficulty(),
+                serverLevel.getDayTime(),
+                0L,
+                serverLevel.getMoonBrightness());
         mob.finalizeSpawn(serverLevel, difficulty, entitySpawnReason, null);
         serverLevel.addFreshEntityWithPassengers(mob);
         return mob;
