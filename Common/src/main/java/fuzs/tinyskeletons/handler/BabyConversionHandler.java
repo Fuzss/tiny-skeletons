@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -110,7 +111,12 @@ public class BabyConversionHandler {
         if (entity instanceof Mob mob) {
             mob.yHeadRot = entity.getYRot();
             mob.yBodyRot = entity.getYRot();
-            DifficultyInstance difficulty = serverLevel.getCurrentDifficultyAt(parent.blockPosition());
+            // this should normally be level.getCurrentDifficultyAt(mob.blockPosition()), which for some reason causes a world gen deadlock when generating nether fortresses for some setups (cannot reproduce in vanilla)
+            // the deadlock comes from Level::getChunkAt, so we omit that part all call everything else as usual since the chunk otherwise is not queried
+            DifficultyInstance difficulty = new DifficultyInstance(serverLevel.getDifficulty(),
+                    serverLevel.getDayTime(),
+                    0L,
+                    DimensionType.MOON_BRIGHTNESS_PER_PHASE[0]);
             mob.finalizeSpawn(serverLevel, difficulty, entitySpawnReason, null);
         }
 
