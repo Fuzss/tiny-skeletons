@@ -28,7 +28,7 @@ public class SkeletonSpawningHandler {
         // since there is no baby flag as with zombies which could force that otherwise.
         if (!isLoadedFromDisk && entitySpawnReason != null && entitySpawnReason != EntitySpawnReason.COMMAND
                 && Zombie.getSpawnAsBabyOdds(serverLevel.getRandom())) {
-            Holder<EntityType<?>> holder = BabySkeletonHelper.ADULT_TO_BABY_SKELETON_MAP.get(entity.getType());
+            Holder<EntityType<?>> holder = BabySkeletonHelper.ADULT_TO_BABY_SKELETONS.get(entity.getType());
             if (holder != null) {
                 Entity babyEntity = spawnOffspring(serverLevel, holder.value(), entity, entitySpawnReason);
                 if (babyEntity != null) {
@@ -42,7 +42,7 @@ public class SkeletonSpawningHandler {
         ItemStack itemInHand = player.getItemInHand(interactionHand);
         if (target.isAlive() && itemInHand.getItem() instanceof SpawnEggItem) {
             EntityType<?> entityType = SpawnEggItem.getType(itemInHand);
-            Holder<EntityType<?>> holder = BabySkeletonHelper.ADULT_TO_BABY_SKELETON_MAP.get(entityType);
+            Holder<EntityType<?>> holder = BabySkeletonHelper.ADULT_TO_BABY_SKELETONS.get(entityType);
             if (holder != null && (target.getType() == holder.value() || target.getType() == entityType)) {
                 if (level instanceof ServerLevel serverLevel) {
                     Entity entity = spawnOffspring(serverLevel,

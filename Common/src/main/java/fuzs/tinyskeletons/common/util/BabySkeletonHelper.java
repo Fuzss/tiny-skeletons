@@ -29,16 +29,16 @@ import java.util.Optional;
 public class BabySkeletonHelper {
     public static final float BABY_EYE_HEIGHT_SCALE = 0.534F;
     public static final float DEFAULT_PICK_RADIUS = 0.3F;
-    public static final BiMap<EntityType<?>, Holder<EntityType<?>>> ADULT_TO_BABY_SKELETON_MAP = ImmutableBiMap.of(
-            EntityType.SKELETON,
+    public static final BiMap<EntityType<?>, Holder<EntityType<?>>> ADULT_TO_BABY_SKELETONS = ImmutableBiMap.of(
+            EntityTypes.SKELETON,
             (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_SKELETON_ENTITY_TYPE),
-            EntityType.WITHER_SKELETON,
+            EntityTypes.WITHER_SKELETON,
             (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_WITHER_SKELETON_ENTITY_TYPE),
-            EntityType.STRAY,
+            EntityTypes.STRAY,
             (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_STRAY_ENTITY_TYPE),
-            EntityType.BOGGED,
+            EntityTypes.BOGGED,
             (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_BOGGED_ENTITY_TYPE),
-            EntityType.PARCHED,
+            EntityTypes.PARCHED,
             (Holder<EntityType<?>>) ((Holder<?>) ModRegistry.BABY_PARCHED_ENTITY_TYPE));
 
     public static AttributeSupplier.Builder applyCommonAttributes(AttributeSupplier.Builder builder) {
@@ -102,7 +102,7 @@ public class BabySkeletonHelper {
      * @see Mob#getPickResult()
      */
     public static @Nullable ItemStack getPickResult(Mob mob) {
-        EntityType<?> adultType = ADULT_TO_BABY_SKELETON_MAP.inverse().get(mob.typeHolder());
+        EntityType<?> adultType = ADULT_TO_BABY_SKELETONS.inverse().get(mob.typeHolder());
         if (adultType != null) {
             Optional<Holder<Item>> optional = SpawnEggItem.byId(adultType);
             if (optional.isPresent()) {

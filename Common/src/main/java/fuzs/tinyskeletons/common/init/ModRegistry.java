@@ -6,11 +6,11 @@ import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.world.entity.monster.skeleton.*;
 import fuzs.tinyskeletons.common.world.entity.projectile.throwableitemprojectile.HurtingItemProjectile;
 import net.minecraft.core.Holder;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Blocks;
 
 public class ModRegistry {
     static final RegistryManager REGISTRIES = RegistryManager.from(TinySkeletons.MOD_ID);
@@ -37,7 +37,7 @@ public class ModRegistry {
                     .sized(0.6F, 1.99F)
                     .eyeHeight(1.74F)
                     .ridingOffset(-0.7F)
-                    .immuneTo(Blocks.POWDER_SNOW)
+                    .immuneTo(BlockTags.STRAY_IMMUNE_TO)
                     .clientTrackingRange(8)
                     .notInPeaceful());
     public static final Holder.Reference<EntityType<BabyBogged>> BABY_BOGGED_ENTITY_TYPE = REGISTRIES.registerEntityType(
