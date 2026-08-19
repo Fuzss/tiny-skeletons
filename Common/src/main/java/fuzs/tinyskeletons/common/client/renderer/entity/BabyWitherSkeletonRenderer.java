@@ -3,7 +3,6 @@ package fuzs.tinyskeletons.common.client.renderer.entity;
 import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.client.model.geom.ModModelLayers;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabyWitherSkeletonModel;
-import fuzs.tinyskeletons.common.client.packs.VanillaTexture;
 import fuzs.tinyskeletons.common.client.renderer.entity.layers.SkullInHandLayer;
 import fuzs.tinyskeletons.common.client.renderer.entity.state.BabyWitherSkeletonRenderState;
 import fuzs.tinyskeletons.common.world.entity.monster.skeleton.BabyWitherSkeleton;
@@ -22,8 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public class BabyWitherSkeletonRenderer extends AbstractSkeletonRenderer<BabyWitherSkeleton, BabyWitherSkeletonRenderState> {
     public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
-    public static final VanillaTexture WITHER_SKELETON_TEXTURE = new VanillaTexture(
-            "textures/entity/skeleton/wither_skeleton.png");
     public static final Identifier BABY_WITHER_SKELETON_TEXTURE = TinySkeletons.id(
             "textures/entity/skeleton/wither_skeleton_baby.png");
 

@@ -3,7 +3,6 @@ package fuzs.tinyskeletons.common.client.renderer.entity;
 import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.client.model.geom.ModModelLayers;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabySkeletonModel;
-import fuzs.tinyskeletons.common.client.packs.VanillaTexture;
 import fuzs.tinyskeletons.common.client.renderer.entity.layers.ItemInMainHandLayer;
 import fuzs.tinyskeletons.common.client.renderer.entity.layers.ItemOnBackLayer;
 import fuzs.tinyskeletons.common.client.renderer.entity.state.BabySkeletonRenderState;
@@ -20,7 +19,6 @@ import net.minecraft.resources.Identifier;
  * @see net.minecraft.client.renderer.entity.SkeletonRenderer
  */
 public class BabySkeletonRenderer extends AbstractSkeletonRenderer<BabySkeleton, BabySkeletonRenderState> {
-    public static final VanillaTexture SKELETON_TEXTURE = new VanillaTexture("textures/entity/skeleton/skeleton.png");
     public static final Identifier BABY_SKELETON_TEXTURE = TinySkeletons.id("textures/entity/skeleton/skeleton_baby.png");
 
     public BabySkeletonRenderer(EntityRendererProvider.Context context) {

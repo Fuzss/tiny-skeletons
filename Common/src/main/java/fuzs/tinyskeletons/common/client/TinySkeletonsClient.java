@@ -3,14 +3,10 @@ package fuzs.tinyskeletons.common.client;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.common.api.client.core.v1.context.EntityRenderersContext;
 import fuzs.puzzleslib.common.api.client.core.v1.context.LayerDefinitionsContext;
-import fuzs.puzzleslib.common.api.core.v1.context.PackRepositorySourcesContext;
-import fuzs.puzzleslib.common.api.resources.v1.PackResourcesHelper;
-import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.client.model.geom.ModModelLayers;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabyBoggedModel;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabySkeletonModel;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabyWitherSkeletonModel;
-import fuzs.tinyskeletons.common.client.packs.SkeletonTextureCopiesPackResources;
 import fuzs.tinyskeletons.common.client.renderer.entity.*;
 import fuzs.tinyskeletons.common.init.ModRegistry;
 import net.minecraft.client.model.HumanoidModel;
@@ -80,12 +76,5 @@ public class TinySkeletonsClient implements ClientModConstructor {
                         PartPose.ZERO).map((MeshDefinition mesh) -> {
                     return LayerDefinition.create(mesh, 64, 64);
                 }));
-    }
-
-    @Override
-    public void onAddResourcePackFinders(PackRepositorySourcesContext context) {
-        context.registerRepositorySource(PackResourcesHelper.buildClientPack(TinySkeletons.id("textures"),
-                SkeletonTextureCopiesPackResources::new,
-                true));
     }
 }
