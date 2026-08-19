@@ -8,6 +8,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.skeleton.Stray;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -47,9 +48,7 @@ public class BabyStray extends Stray {
 
     @Override
     protected EntityDimensions getDefaultDimensions(Pose pose) {
-        return super.getDefaultDimensions(pose)
-                .withEyeHeight(this.getType().getDimensions().eyeHeight() * (this.isBaby() ?
-                        BabySkeletonHelper.BABY_EYE_HEIGHT_SCALE : 1.0F));
+        return Zombie.BABY_DIMENSIONS;
     }
 
     @Override
