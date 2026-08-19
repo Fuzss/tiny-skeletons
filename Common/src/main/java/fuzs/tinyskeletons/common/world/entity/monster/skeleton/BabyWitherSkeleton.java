@@ -7,10 +7,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.entity.animal.wolf.Wolf;
@@ -22,6 +19,10 @@ import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
 
 public class BabyWitherSkeleton extends WitherSkeleton implements SkullCarryingMob {
+    private static final EntityDimensions BABY_DIMENSIONS = EntityDimensions.scalable(0.49F, 1.1F)
+            .withEyeHeight(0.9F)
+            .withAttachments(EntityAttachments.builder().attach(EntityAttachment.VEHICLE, 0.0F, 0.25F, 0.0F));
+
     private final AvoidEntityGoal<Player> fleePlayerGoal = new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0D, 1.2D);
     private int dancingTicks;
 
@@ -104,8 +105,7 @@ public class BabyWitherSkeleton extends WitherSkeleton implements SkullCarryingM
 
     @Override
     protected EntityDimensions getDefaultDimensions(Pose pose) {
-        return super.getDefaultDimensions(pose)
-                .withEyeHeight(this.getType().getDimensions().eyeHeight() * (this.isBaby() ? 0.534F : 1.0F));
+        return BABY_DIMENSIONS;
     }
 
     @Override

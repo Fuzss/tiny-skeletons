@@ -27,7 +27,6 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 public class BabySkeletonHelper {
-    public static final float BABY_EYE_HEIGHT_SCALE = 0.534F;
     public static final float DEFAULT_PICK_RADIUS = 0.3F;
     public static final BiMap<EntityType<?>, Holder<EntityType<?>>> ADULT_TO_BABY_SKELETON_MAP = ImmutableBiMap.of(
             EntityType.SKELETON,

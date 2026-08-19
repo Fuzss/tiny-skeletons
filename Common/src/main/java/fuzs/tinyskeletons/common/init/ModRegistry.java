@@ -64,6 +64,8 @@ public class ModRegistry {
                     .updateInterval(10));
 
     static final TagFactory TAGS = TagFactory.make(TinySkeletons.MOD_ID);
+    public static final TagKey<Item> BABY_SKELETON_PRIMARY_WEAPONS_ITEM_TAG = TAGS.registerItemTag("baby_skeleton_primary_weapons");
+    public static final TagKey<Item> BABY_SKELETON_SECONDARY_WEAPONS_ITEM_TAG = TAGS.registerItemTag("baby_skeleton_secondary_weapons");
     public static final TagKey<Item> BABY_BOGGED_THROWABLES_ITEM_TAG = TAGS.registerItemTag("baby_bogged_throwables");
     public static final TagKey<Item> BABY_PARCHED_THROWABLES_ITEM_TAG = TAGS.registerItemTag("baby_parched_throwables");
     public static final TagKey<Item> BABY_STRAY_THROWABLES_ITEM_TAG = TAGS.registerItemTag("baby_stray_throwables");

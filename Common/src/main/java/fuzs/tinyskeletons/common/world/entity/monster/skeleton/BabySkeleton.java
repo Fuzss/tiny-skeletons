@@ -1,6 +1,5 @@
 package fuzs.tinyskeletons.common.world.entity.monster.skeleton;
 
-import fuzs.puzzleslib.common.api.item.v2.ToolTypeHelper;
 import fuzs.tinyskeletons.common.init.ModRegistry;
 import fuzs.tinyskeletons.common.util.BabySkeletonHelper;
 import fuzs.tinyskeletons.common.world.entity.ai.goal.RangedBowAttackWithoutStrafingGoal;
@@ -12,7 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.skeleton.Skeleton;
-import net.minecraft.world.item.BowItem;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -42,15 +41,14 @@ public class BabySkeleton extends Skeleton {
 
     @Override
     protected EntityDimensions getDefaultDimensions(Pose pose) {
-        return super.getDefaultDimensions(pose)
-                .withEyeHeight(this.getType().getDimensions().eyeHeight() * (this.isBaby() ? 0.534F : 1.0F));
+        return Zombie.BABY_DIMENSIONS;
     }
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
         super.populateDefaultEquipmentSlots(random, difficulty);
         this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.WOODEN_SWORD));
-        // back item shouldn't be dropped
+        // The offhand item should never be dropped.
         this.setDropChance(EquipmentSlot.OFFHAND, 0.0F);
     }
 
@@ -66,6 +64,7 @@ public class BabySkeleton extends Skeleton {
                     for (EquipmentSlot slot : EquipmentSlot.values()) {
                         babyStray.setItemSlot(slot, ItemStack.EMPTY);
                     }
+
                     babyStray.populateDefaultEquipmentSlots(this.random,
                             ((ServerLevel) babyStray.level()).getCurrentDifficultyAt(babyStray.blockPosition()));
                     if (!this.isSilent()) {
@@ -81,12 +80,14 @@ public class BabySkeleton extends Skeleton {
             if (this.switchWeaponCooldown > 0) this.switchWeaponCooldown--;
             if (this.switchWeaponCooldown == 0) {
                 if (this.getTarget() != null && this.distanceToSqr(this.getTarget()) < 16.0) {
-                    if (ToolTypeHelper.INSTANCE.isBow(this.getMainHandItem())) {
+                    if (this.getMainHandItem().is(ModRegistry.BABY_SKELETON_PRIMARY_WEAPONS_ITEM_TAG)
+                            && this.getOffhandItem().is(ModRegistry.BABY_SKELETON_SECONDARY_WEAPONS_ITEM_TAG)) {
                         this.setHandItems(this.getOffhandItem(), this.getMainHandItem());
                         this.switchWeaponCooldown = 60;
                     }
                 } else if (this.getTarget() == null || this.distanceToSqr(this.getTarget()) > 36.0) {
-                    if (ToolTypeHelper.INSTANCE.isSword(this.getMainHandItem())) {
+                    if (this.getMainHandItem().is(ModRegistry.BABY_SKELETON_SECONDARY_WEAPONS_ITEM_TAG)
+                            && this.getOffhandItem().is(ModRegistry.BABY_SKELETON_PRIMARY_WEAPONS_ITEM_TAG)) {
                         this.setHandItems(this.getOffhandItem(), this.getMainHandItem());
                         this.switchWeaponCooldown = 60;
                     }
@@ -102,13 +103,13 @@ public class BabySkeleton extends Skeleton {
 
     @Override
     public void reassessWeaponGoal() {
-        if (this.level() instanceof ServerLevel) {
+        if (this.level() instanceof ServerLevel serverLevel) {
             this.goalSelector.removeGoal(this.meleeGoal);
             this.goalSelector.removeGoal(this.bowGoal);
-            // do not search for a bow, only use it when held in main hand
-            if (this.getMainHandItem().getItem() instanceof BowItem) {
+            // Only use a bow when held in the main hand.
+            if (this.getMainHandItem().is(ModRegistry.BABY_SKELETON_PRIMARY_WEAPONS_ITEM_TAG)) {
                 int attackInterval = this.getHardAttackInterval();
-                if (this.level().getDifficulty() != Difficulty.HARD) {
+                if (serverLevel.getDifficulty() != Difficulty.HARD) {
                     attackInterval = this.getAttackInterval();
                 }
 

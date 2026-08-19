@@ -23,6 +23,8 @@ public class ModModelLayers {
     public static final ModelLayerLocation BABY_BOGGED_OUTER_LAYER = MODEL_LAYERS.registerModelLayer("baby_bogged",
             "outer");
     public static final ModelLayerLocation BABY_PARCHED = MODEL_LAYERS.registerModelLayer("baby_parched");
+    public static final ModelLayerLocation BABY_PARCHED_OUTER_LAYER = MODEL_LAYERS.registerModelLayer("baby_parched",
+            "outer");
     public static final ArmorModelSet<ModelLayerLocation> BABY_PARCHED_ARMOR = MODEL_LAYERS.registerArmorSet(
             "baby_parched");
 }
