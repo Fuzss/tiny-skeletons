@@ -1,10 +1,10 @@
 package fuzs.tinyskeletons.common.client.renderer.entity;
 
-import fuzs.puzzleslib.common.api.item.v2.ToolTypeHelper;
 import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.client.model.geom.ModModelLayers;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabySkeletonModel;
 import fuzs.tinyskeletons.common.client.renderer.entity.state.BabySkeletonRenderState;
+import fuzs.tinyskeletons.common.init.ModRegistry;
 import fuzs.tinyskeletons.common.world.entity.monster.skeleton.BabySkeleton;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
@@ -34,8 +34,8 @@ public class BabySkeletonRenderer extends AbstractSkeletonRenderer<BabySkeleton,
     @Override
     public void extractRenderState(BabySkeleton entity, BabySkeletonRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
-        if (ToolTypeHelper.INSTANCE.isSword(state.getOffHandItemStack())
-                || ToolTypeHelper.INSTANCE.isBow(state.getOffHandItemStack())) {
+        if (state.getOffHandItemStack().is(ModRegistry.BABY_SKELETON_PRIMARY_WEAPONS_ITEM_TAG)
+                || state.getOffHandItemStack().is(ModRegistry.BABY_SKELETON_SECONDARY_WEAPONS_ITEM_TAG)) {
             state.getOffHandItemState().clear();
         }
     }
