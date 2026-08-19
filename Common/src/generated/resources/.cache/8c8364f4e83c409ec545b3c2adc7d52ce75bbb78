@@ -1,4 +1,6 @@
-// 26.1.2	2026-05-06T11:46:57.981799	Tags for minecraft:item mod id vanilla
+// 26.1.2	2026-08-19T23:42:46.871452	Tags for minecraft:item mod id vanilla
 19e11fe166c340dfa85d5cf6fb216048895a9af1 data/tinyskeletons/tags/item/baby_bogged_throwables.json
 82aeade700265a023adf13ac5e3866b479208176 data/tinyskeletons/tags/item/baby_parched_throwables.json
+c0a0ee59eafd1254826209e602f74833bee6a402 data/tinyskeletons/tags/item/baby_skeleton_primary_weapons.json
+e6756cdd6fb03cf772eba210ae3f93335e83dcd6 data/tinyskeletons/tags/item/baby_skeleton_secondary_weapons.json
 ea2b7aa418c563ab8f02c06883d3c45e0ec7435c data/tinyskeletons/tags/item/baby_stray_throwables.json
