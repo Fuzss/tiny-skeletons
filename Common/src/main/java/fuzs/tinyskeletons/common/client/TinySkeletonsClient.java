@@ -51,7 +51,7 @@ public class TinySkeletonsClient implements ClientModConstructor {
         });
         context.registerLayerDefinition(ModModelLayers.BABY_WITHER_SKELETON, BabyWitherSkeletonModel::createBodyLayer);
         context.registerArmorDefinition(ModModelLayers.BABY_WITHER_SKELETON_ARMOR,
-                () -> HumanoidModel.createBabyArmorMeshSet(LayerDefinitions.BABY_INNER_ARMOR_DEFORMATION,
+                () -> BabyWitherSkeletonModel.createBabyArmorMeshSet(LayerDefinitions.BABY_INNER_ARMOR_DEFORMATION,
                         LayerDefinitions.BABY_OUTER_ARMOR_DEFORMATION,
                         PartPose.ZERO).map((MeshDefinition mesh) -> {
                     return LayerDefinition.create(mesh, 64, 64);

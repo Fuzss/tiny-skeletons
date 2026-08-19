@@ -66,6 +66,7 @@ public class BabySkeleton extends Skeleton {
                     for (EquipmentSlot slot : EquipmentSlot.values()) {
                         babyStray.setItemSlot(slot, ItemStack.EMPTY);
                     }
+
                     babyStray.populateDefaultEquipmentSlots(this.random,
                             ((ServerLevel) babyStray.level()).getCurrentDifficultyAt(babyStray.blockPosition()));
                     if (!this.isSilent()) {
@@ -81,12 +82,14 @@ public class BabySkeleton extends Skeleton {
             if (this.switchWeaponCooldown > 0) this.switchWeaponCooldown--;
             if (this.switchWeaponCooldown == 0) {
                 if (this.getTarget() != null && this.distanceToSqr(this.getTarget()) < 16.0) {
-                    if (ToolTypeHelper.INSTANCE.isBow(this.getMainHandItem())) {
+                    if (ToolTypeHelper.INSTANCE.isBow(this.getMainHandItem())
+                            && ToolTypeHelper.INSTANCE.isSword(this.getOffhandItem())) {
                         this.setHandItems(this.getOffhandItem(), this.getMainHandItem());
                         this.switchWeaponCooldown = 60;
                     }
                 } else if (this.getTarget() == null || this.distanceToSqr(this.getTarget()) > 36.0) {
-                    if (ToolTypeHelper.INSTANCE.isSword(this.getMainHandItem())) {
+                    if (ToolTypeHelper.INSTANCE.isSword(this.getMainHandItem())
+                            && ToolTypeHelper.INSTANCE.isBow(this.getOffhandItem())) {
                         this.setHandItems(this.getOffhandItem(), this.getMainHandItem());
                         this.switchWeaponCooldown = 60;
                     }
