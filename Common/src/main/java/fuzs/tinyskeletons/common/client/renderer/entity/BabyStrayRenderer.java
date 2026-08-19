@@ -1,8 +1,8 @@
 package fuzs.tinyskeletons.common.client.renderer.entity;
 
-import fuzs.puzzleslib.common.api.client.renderer.v1.layers.SimpleHumanoidArmorLayer;
-import fuzs.puzzleslib.common.api.client.renderer.v1.layers.SimpleItemInHandLayer;
+import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.client.model.geom.ModModelLayers;
+import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabySkeletonModel;
 import fuzs.tinyskeletons.common.client.packs.VanillaTexture;
 import fuzs.tinyskeletons.common.world.entity.monster.skeleton.BabyStray;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -11,8 +11,6 @@ import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
 import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
-import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.layers.SkeletonClothingLayer;
 import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
 import net.minecraft.resources.Identifier;
@@ -24,24 +22,24 @@ public class BabyStrayRenderer extends AbstractSkeletonRenderer<BabyStray, Skele
     public static final VanillaTexture STRAY_SKELETON_TEXTURE = new VanillaTexture("textures/entity/skeleton/stray.png");
     public static final VanillaTexture STRAY_CLOTHES_TEXTURE = new VanillaTexture(
             "textures/entity/skeleton/stray_overlay.png");
+    public static final Identifier BABY_STRAY_TEXTURE = TinySkeletons.id("textures/entity/skeleton/stray_baby.png");
+    public static final Identifier BABY_STRAY_CLOTHES_TEXTURE = TinySkeletons.id(
+            "textures/entity/skeleton/stray_baby_overlay.png");
 
     public BabyStrayRenderer(EntityRendererProvider.Context context) {
         this(context, ModModelLayers.BABY_STRAY, ModModelLayers.BABY_STRAY_ARMOR);
     }
 
     private BabyStrayRenderer(EntityRendererProvider.Context context, ModelLayerLocation modelLayer, ArmorModelSet<ModelLayerLocation> armorModelSet) {
-        super(context, modelLayer, armorModelSet);
-        this.layers.removeIf((RenderLayer<SkeletonRenderState, SkeletonModel<SkeletonRenderState>> renderLayer) -> {
-            return renderLayer instanceof ItemInHandLayer || renderLayer instanceof HumanoidArmorLayer;
-        });
-        this.addLayer(new SimpleItemInHandLayer<>(this));
-        this.addLayer(new SimpleHumanoidArmorLayer<>(this,
-                ArmorModelSet.bake(armorModelSet, context.getModelSet(), SkeletonModel::new),
-                context.getEquipmentRenderer()));
+        super(context, armorModelSet, new BabySkeletonModel<>(context.bakeLayer(modelLayer)));
+//        this.layers.removeIf(HumanoidArmorLayer.class::isInstance);
+//        this.addLayer(new HumanoidArmorLayer<>(this,
+//                ArmorModelSet.bake(armorModelSet, context.getModelSet(), SkeletonModel::new),
+//                context.getEquipmentRenderer()));
         this.addLayer(new SkeletonClothingLayer<>(this,
                 context.getModelSet(),
                 ModModelLayers.BABY_STRAY_OUTER_LAYER,
-                STRAY_CLOTHES_TEXTURE.id()));
+                BABY_STRAY_CLOTHES_TEXTURE));
     }
 
     @Override
@@ -51,6 +49,6 @@ public class BabyStrayRenderer extends AbstractSkeletonRenderer<BabyStray, Skele
 
     @Override
     public Identifier getTextureLocation(SkeletonRenderState state) {
-        return STRAY_SKELETON_TEXTURE.id();
+        return BABY_STRAY_TEXTURE;
     }
 }

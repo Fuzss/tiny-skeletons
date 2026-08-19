@@ -6,3 +6,11 @@ accessible  field   net/minecraft/world/entity/monster/skeleton/AbstractSkeleton
 accessible  field   net/minecraft/world/entity/ai/goal/RangedBowAttackGoal  attackIntervalMin   I
 accessible  field   net/minecraft/world/entity/ai/goal/RangedBowAttackGoal  attackRadiusSqr F
 accessible  field   net/minecraft/world/entity/ai/goal/RangedBowAttackGoal  strafingTime    I
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	BABY_INNER_ARMOR_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	BABY_OUTER_ARMOR_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	BABY_PIGLIN_ARMOR_ARM_OFFSET	Lnet/minecraft/client/model/geom/PartPose;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	BABY_PIGLIN_INNER_ARMOR_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	BABY_PIGLIN_OUTER_ARMOR_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	FISH_PATTERN_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	INNER_ARMOR_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+transitive-accessible	field	net/minecraft/client/model/geom/LayerDefinitions	OUTER_ARMOR_DEFORMATION	Lnet/minecraft/client/model/geom/builders/CubeDeformation;

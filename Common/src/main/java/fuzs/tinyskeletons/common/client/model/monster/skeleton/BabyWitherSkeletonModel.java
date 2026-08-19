@@ -2,27 +2,32 @@ package fuzs.tinyskeletons.common.client.model.monster.skeleton;
 
 import fuzs.tinyskeletons.common.client.renderer.entity.state.BabyWitherSkeletonRenderState;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.monster.skeleton.SkeletonModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.util.Mth;
 
-public class BabyWitherSkeletonModel extends SkeletonModel<BabyWitherSkeletonRenderState> {
+public class BabyWitherSkeletonModel extends BabySkeletonModel<BabyWitherSkeletonRenderState> {
 
-    public BabyWitherSkeletonModel(ModelPart modelPart) {
-        super(modelPart);
+    public BabyWitherSkeletonModel(ModelPart root) {
+        super(root);
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        return BabySkeletonModel.createBodyLayer(CubeDeformation.NONE, -6.25F, 6.0F, 5.0F);
     }
 
     @Override
     public void setupAnim(BabyWitherSkeletonRenderState state) {
         super.setupAnim(state);
         if (state.hasSkullItem()) {
-            float f = Mth.sin(state.attackTime * (float) Math.PI);
-            float f1 = Mth.sin((1.0F - (1.0F - state.attackTime) * (1.0F - state.attackTime)) * (float) Math.PI);
+            float f = Mth.sin(state.attackTime * Mth.PI);
+            float f1 = Mth.sin((1.0F - (1.0F - state.attackTime) * (1.0F - state.attackTime)) * Mth.PI);
             this.rightArm.zRot = 0.0F;
             this.leftArm.zRot = 0.0F;
             this.rightArm.yRot = -(0.1F - f * 0.6F);
             this.leftArm.yRot = 0.1F - f * 0.6F;
-            this.rightArm.xRot = (-(float) Math.PI / 2F);
-            this.leftArm.xRot = (-(float) Math.PI / 2F);
+            this.rightArm.xRot = -Mth.HALF_PI;
+            this.leftArm.xRot = -Mth.HALF_PI;
             this.rightArm.xRot -= f * 1.2F - f1 * 0.4F;
             this.leftArm.xRot -= f * 1.2F - f1 * 0.4F;
             // no call to bob arms
@@ -32,7 +37,7 @@ public class BabyWitherSkeletonModel extends SkeletonModel<BabyWitherSkeletonRen
             float f3 = state.ageInTicks / 60.0F;
             this.head.x = Mth.sin(f3 * 10.0F);
             this.head.y = Mth.sin(f3 * 40.0F) + 0.4F;
-            this.rightArm.zRot = ((float) Math.PI / 180F) * (70.0F + Mth.cos(f3 * 40.0F) * 10.0F);
+            this.rightArm.zRot = (Mth.PI / 180F) * (70.0F + Mth.cos(f3 * 40.0F) * 10.0F);
             this.leftArm.zRot = this.rightArm.zRot * -1.0F;
             this.rightArm.y = Mth.sin(f3 * 40.0F) * 0.5F + 1.5F;
             this.leftArm.y = Mth.sin(f3 * 40.0F) * 0.5F + 1.5F;

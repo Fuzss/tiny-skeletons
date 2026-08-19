@@ -1,6 +1,6 @@
 package fuzs.tinyskeletons.common.client.renderer.entity;
 
-import fuzs.puzzleslib.common.api.client.renderer.v1.layers.SimpleHumanoidArmorLayer;
+import fuzs.tinyskeletons.common.TinySkeletons;
 import fuzs.tinyskeletons.common.client.model.geom.ModModelLayers;
 import fuzs.tinyskeletons.common.client.model.monster.skeleton.BabyWitherSkeletonModel;
 import fuzs.tinyskeletons.common.client.packs.VanillaTexture;
@@ -8,15 +8,12 @@ import fuzs.tinyskeletons.common.client.renderer.entity.layers.SkullInHandLayer;
 import fuzs.tinyskeletons.common.client.renderer.entity.state.BabyWitherSkeletonRenderState;
 import fuzs.tinyskeletons.common.world.entity.monster.skeleton.BabyWitherSkeleton;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.monster.skeleton.SkeletonModel;
 import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
 import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -27,6 +24,8 @@ public class BabyWitherSkeletonRenderer extends AbstractSkeletonRenderer<BabyWit
     public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
     public static final VanillaTexture WITHER_SKELETON_TEXTURE = new VanillaTexture(
             "textures/entity/skeleton/wither_skeleton.png");
+    public static final Identifier BABY_WITHER_SKELETON_TEXTURE = TinySkeletons.id(
+            "textures/entity/skeleton/wither_skeleton_baby.png");
 
     private final BlockModelResolver blockModelResolver;
 
@@ -37,13 +36,8 @@ public class BabyWitherSkeletonRenderer extends AbstractSkeletonRenderer<BabyWit
     private BabyWitherSkeletonRenderer(EntityRendererProvider.Context context, ModelLayerLocation modelLayer, ArmorModelSet<ModelLayerLocation> armorModelSet) {
         super(context, armorModelSet, new BabyWitherSkeletonModel(context.bakeLayer(modelLayer)));
         this.blockModelResolver = context.getBlockModelResolver();
-        this.layers.removeIf((RenderLayer<BabyWitherSkeletonRenderState, SkeletonModel<BabyWitherSkeletonRenderState>> renderLayer) -> {
-            return renderLayer instanceof ItemInHandLayer || renderLayer instanceof HumanoidArmorLayer;
-        });
+        this.layers.removeIf(ItemInHandLayer.class::isInstance);
         this.addLayer(new SkullInHandLayer<>(this));
-        this.addLayer(new SimpleHumanoidArmorLayer<>(this,
-                ArmorModelSet.bake(armorModelSet, context.getModelSet(), BabyWitherSkeletonModel::new),
-                context.getEquipmentRenderer()));
     }
 
     @Override
@@ -65,6 +59,6 @@ public class BabyWitherSkeletonRenderer extends AbstractSkeletonRenderer<BabyWit
 
     @Override
     public Identifier getTextureLocation(BabyWitherSkeletonRenderState state) {
-        return WITHER_SKELETON_TEXTURE.id();
+        return BABY_WITHER_SKELETON_TEXTURE;
     }
 }
