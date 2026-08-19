@@ -50,7 +50,7 @@ public class BabySkeleton extends Skeleton {
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
         super.populateDefaultEquipmentSlots(random, difficulty);
         this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.WOODEN_SWORD));
-        // back item shouldn't be dropped
+        // The offhand item should never be dropped.
         this.setDropChance(EquipmentSlot.OFFHAND, 0.0F);
     }
 

@@ -1,10 +1,12 @@
 package fuzs.tinyskeletons.common.client.model.monster.skeleton;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.model.monster.skeleton.SkeletonModel;
 import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
+import net.minecraft.world.entity.HumanoidArm;
 
 /**
  * @see net.minecraft.client.model.monster.zombie.BabyZombieModel
@@ -60,5 +62,14 @@ public class BabySkeletonModel<S extends SkeletonRenderState> extends SkeletonMo
                         .addBox(-1.0F, 0.0F, -0.5F, 1.0F, lowerBodyHeight, 1.0F, cubeDeformation),
                 PartPose.offset(1.5F, 24.0F - lowerBodyHeight, 0.0F));
         return LayerDefinition.create(mesh, 64, 32);
+    }
+
+    @Override
+    public void translateToHand(SkeletonRenderState state, HumanoidArm arm, PoseStack poseStack) {
+        this.root().translateAndRotate(poseStack);
+        ModelPart part = this.getArm(arm);
+        part.x -= 0.5F;
+        part.translateAndRotate(poseStack);
+        part.x += 0.5F;
     }
 }
