@@ -34,8 +34,7 @@ public class BabySkeletonRenderer extends AbstractSkeletonRenderer<BabySkeleton,
     @Override
     public void extractRenderState(BabySkeleton entity, BabySkeletonRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
-        if (state.getOffHandItemStack().is(ModRegistry.BABY_SKELETON_PRIMARY_WEAPONS_ITEM_TAG)
-                || state.getOffHandItemStack().is(ModRegistry.BABY_SKELETON_SECONDARY_WEAPONS_ITEM_TAG)) {
+        if (state.getOffHandItemStack().is(ModRegistry.BABY_SKELETON_SECONDARY_WEAPONS_ITEM_TAG)) {
             state.getOffHandItemState().clear();
         }
     }
