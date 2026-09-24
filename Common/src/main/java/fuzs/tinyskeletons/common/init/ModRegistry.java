@@ -59,6 +59,7 @@ public class ModRegistry {
     public static final Holder.Reference<EntityType<HurtingItemProjectile>> THROWN_ITEM_ENTITY_TYPE = REGISTRIES.registerEntityType(
             "thrown_item",
             () -> EntityType.Builder.<HurtingItemProjectile>of(HurtingItemProjectile::new, MobCategory.MISC)
+                    .noLootTable()
                     .sized(0.25F, 0.25F)
                     .clientTrackingRange(4)
                     .updateInterval(10));
