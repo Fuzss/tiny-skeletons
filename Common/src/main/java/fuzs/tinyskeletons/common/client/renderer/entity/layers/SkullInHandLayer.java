@@ -25,11 +25,11 @@ public class SkullInHandLayer<S extends BabyWitherSkeletonRenderState, M extends
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0875F, 0.35F);
             poseStack.translate(0.0F, 0.6875F, -0.75F);
-            poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
-            poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+            poseStack.rotateDegrees(Axis.XP, 20.0F);
+            poseStack.rotateDegrees(Axis.YP, -90.0F);
             poseStack.translate(0.25F, 0.1875F, 0.25F);
             poseStack.scale(-0.5F, -0.5F, 0.5F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+            poseStack.rotateDegrees(Axis.YP, 90.0F);
             state.skullModel.submit(poseStack,
                     submitNodeCollector,
                     lightCoords,

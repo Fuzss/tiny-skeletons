@@ -61,8 +61,8 @@ public class BabyWitherSkeletonModel extends BabySkeletonModel<BabyWitherSkeleto
     public void setupAnim(BabyWitherSkeletonRenderState state) {
         super.setupAnim(state);
         if (state.hasSkullItem()) {
-            float f = Mth.sin(state.attackTime * Mth.PI);
-            float f1 = Mth.sin((1.0F - (1.0F - state.attackTime) * (1.0F - state.attackTime)) * Mth.PI);
+            float f = Mth.sin(state.swingAnimation * Mth.PI);
+            float f1 = Mth.sin((1.0F - (1.0F - state.swingAnimation) * (1.0F - state.swingAnimation)) * Mth.PI);
             this.rightArm.zRot = 0.0F;
             this.leftArm.zRot = 0.0F;
             this.rightArm.yRot = -(0.1F - f * 0.6F);

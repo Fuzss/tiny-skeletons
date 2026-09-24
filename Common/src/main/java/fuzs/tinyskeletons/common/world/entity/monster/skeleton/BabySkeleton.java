@@ -53,24 +53,31 @@ public class BabySkeleton extends Skeleton {
     }
 
     @Override
-    protected void doFreezeConversion() {
-        this.convertTo(ModRegistry.BABY_STRAY_ENTITY_TYPE.value(),
-                ConversionParams.single(this, true, true),
-                (BabyStray babyStray) -> {
-                    // need this call as otherwise overriding with empty items will not send an update to clients as empty is default value and all this is happening within the same tick
-                    // (LivingEntity::detectEquipmentUpdates is called in the tick method)
-                    babyStray.detectEquipmentUpdates();
-                    // cheap hack so we don't have to implement proper fighting behavior for strays, just give them their default snowball and remove everything else
-                    for (EquipmentSlot slot : EquipmentSlot.values()) {
-                        babyStray.setItemSlot(slot, ItemStack.EMPTY);
-                    }
+    @SuppressWarnings("unchecked")
+    public <T extends Mob> @Nullable T convertTo(EntityType<T> entityType, ConversionParams conversionParams, EntitySpawnReason spawnReason, ConversionParams.AfterConversion<T> afterConversion) {
+        // the inherited vanilla freezing tracker always converts to a vanilla stray, redirect it to the baby stray
+        if (entityType == EntityTypes.STRAY) {
+            return (T) this.convertTo(ModRegistry.BABY_STRAY_ENTITY_TYPE.value(),
+                    conversionParams,
+                    spawnReason,
+                    (BabyStray babyStray) -> {
+                        // need this call as otherwise overriding with empty items will not send an update to clients as empty is default value and all this is happening within the same tick
+                        // (LivingEntity::detectEquipmentUpdates is called in the tick method)
+                        babyStray.detectEquipmentUpdates();
+                        // cheap hack so we don't have to implement proper fighting behavior for strays, just give them their default snowball and remove everything else
+                        for (EquipmentSlot slot : EquipmentSlot.values()) {
+                            babyStray.setItemSlot(slot, ItemStack.EMPTY);
+                        }
 
-                    babyStray.populateDefaultEquipmentSlots(this.random,
-                            ((ServerLevel) babyStray.level()).getCurrentDifficultyAt(babyStray.blockPosition()));
-                    if (!this.isSilent()) {
-                        this.level().levelEvent(null, LevelEvent.SOUND_SKELETON_TO_STRAY, this.blockPosition(), 0);
-                    }
-                });
+                        babyStray.populateDefaultEquipmentSlots(this.random,
+                                ((ServerLevel) babyStray.level()).getCurrentDifficultyAt(babyStray.blockPosition()));
+                        if (!this.isSilent()) {
+                            this.level().levelEvent(null, LevelEvent.SOUND_SKELETON_TO_STRAY, this.blockPosition(), 0);
+                        }
+                    });
+        }
+
+        return super.convertTo(entityType, conversionParams, spawnReason, afterConversion);
     }
 
     @Override

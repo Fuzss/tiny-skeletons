@@ -93,7 +93,7 @@ public class BabySkeletonHelper {
             abstractSkeleton.playSound(SoundEvents.SNOW_GOLEM_SHOOT,
                     1.0F,
                     0.4F / (abstractSkeleton.getRandom().nextFloat() * 0.4F + 0.8F));
-            abstractSkeleton.swing(InteractionHand.MAIN_HAND);
+            abstractSkeleton.swing(InteractionHand.MAIN_HAND, itemStack.getAttackAnimation(), false);
         }
     }
 
